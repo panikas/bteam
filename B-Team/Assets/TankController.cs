@@ -5,10 +5,11 @@ using TMPro;
 
 public class TankController : MonoBehaviour
 {
+    public ScaleEyesWhenShoot eyeOne, eyeTwo;
     private CameraShake camShake;
     public Rigidbody rBody;
     public GameObject barrel, tower;
-    public Transform forcePoint;
+    public Transform bulletFirePoint;
     public float shotForce;
     public TextMeshProUGUI ammoText;
     public int ammo;
@@ -20,6 +21,7 @@ public class TankController : MonoBehaviour
     public ParticleSystem ps1, ps2;
     public float forceTimer = 0f;
     public Material tankMat;
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,11 @@ public class TankController : MonoBehaviour
             ps2.Play();
             ammo--;
             rBody.AddForce(tower.transform.up*shotForce, ForceMode.Impulse);
+            GameObject b = Instantiate(bullet, bulletFirePoint.position, bulletFirePoint.rotation);
+            b.GetComponent<Rigidbody>().AddForce(-tower.transform.up * shotForce, ForceMode.Impulse);
             StartCoroutine(ShotAnimation());
+            eyeOne.StartEyeScaleRoutine();
+            eyeTwo.StartEyeScaleRoutine();
             cooldownTimer = 0;
         }
         if (Input.GetKey(KeyCode.A))

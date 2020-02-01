@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour
 {
+    public ParticleSystem ps;
     public TankController tankC;
     // Start is called before the first frame update
     void Start()
@@ -23,13 +24,23 @@ public class Crate : MonoBehaviour
     {
         if(collision.gameObject.name == "TankBody")
         {
+            Instantiate(ps, transform.position, transform.rotation);
+            ps.Play();
             tankC.ammo += 2;
             Destroy(this.gameObject);
         }
         if (collision.gameObject.name == "Terrain")
         {
+            Instantiate(ps, transform.position, transform.rotation);
+            ps.Play();
             Destroy(this.gameObject);
         }
-        
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Instantiate(ps, transform.position, transform.rotation);
+            ps.Play();
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }

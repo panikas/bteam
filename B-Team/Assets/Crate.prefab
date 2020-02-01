@@ -1247,7 +1247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9dd9c898dffffc46812d99667a24ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankC: {fileID: 0}
+  ps: {fileID: 2757610138579987248, guid: dc5f5aee7e5137c4a9375a4f9c07a661, type: 3}
+  tankC: {fileID: 7458513369015477958, guid: 840b7d2b43bc0864d90c817c402d933d, type: 3}
 --- !u!1 &7632007531984201132
 GameObject:
   m_ObjectHideFlags: 0
