@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TankController : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class TankController : MonoBehaviour
     public GameObject barrel;
     public Transform forcePoint;
     public float shotForce;
+    public TextMeshPro ammoText;
+    public int ammo;
+    private float cooldownTimer;
+    public float cooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +21,12 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float f = barrel.transform.rotation.z;
-        print(f);
-        if (Input.GetKeyDown(KeyCode.Space))
+        ammoText.text = "Ammo: " + ammo;
+        if (Input.GetKeyDown(KeyCode.Space) && cooldownTimer > cooldown && ammo > 0)
         {
-            
-            //Vector3 v = new Vector3();
-            //print(v);
+            ammo--;
             rBody.AddForce(barrel.transform.up*shotForce, ForceMode.Impulse);
-            //rBody.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+            cooldownTimer = 0;
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -36,5 +38,6 @@ public class TankController : MonoBehaviour
             Vector3 rot = new Vector3(0, 0, 1);
             barrel.transform.Rotate(rot);
         }
+        cooldownTimer += Time.deltaTime;
     }
 }
