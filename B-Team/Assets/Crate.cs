@@ -21,8 +21,15 @@ public class Crate : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        print("COLLIDING");
-        tankC.ammo += 2;
-        Destroy(this.gameObject);
+        if(collision.gameObject.name == "TankBody")
+        {
+            tankC.ammo += 2;
+            Destroy(this.gameObject);
+        }
+        if (collision.gameObject.name == "Terrain")
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
 }

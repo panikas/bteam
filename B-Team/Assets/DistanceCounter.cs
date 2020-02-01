@@ -18,6 +18,15 @@ public class DistanceCounter : MonoBehaviour
     void Update()
     {
         float f = distanceRequired -tankC.transform.position.x;
-        text.text = f + "m left!";
+        int i = (int)f;
+        if(i > 0)
+        {
+            text.text = i + "m! ->";
+        }
+        else
+        {
+            text.text ="<- "+ i + "m!";
+        }
+        
     }
 }
